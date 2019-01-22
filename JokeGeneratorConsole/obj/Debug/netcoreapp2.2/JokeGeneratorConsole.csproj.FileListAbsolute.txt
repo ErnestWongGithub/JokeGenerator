@@ -1,0 +1,11 @@
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\bin\Debug\netcoreapp2.2\JokeGeneratorConsole.deps.json
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\bin\Debug\netcoreapp2.2\JokeGeneratorConsole.runtimeconfig.json
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\bin\Debug\netcoreapp2.2\JokeGeneratorConsole.runtimeconfig.dev.json
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\bin\Debug\netcoreapp2.2\JokeGeneratorConsole.dll
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\bin\Debug\netcoreapp2.2\JokeGeneratorConsole.pdb
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\obj\Debug\netcoreapp2.2\JokeGeneratorConsole.csprojAssemblyReference.cache
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\obj\Debug\netcoreapp2.2\JokeGeneratorConsole.csproj.CoreCompileInputs.cache
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\obj\Debug\netcoreapp2.2\JokeGeneratorConsole.AssemblyInfoInputs.cache
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\obj\Debug\netcoreapp2.2\JokeGeneratorConsole.AssemblyInfo.cs
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\obj\Debug\netcoreapp2.2\JokeGeneratorConsole.dll
+C:\Users\ernestwong\Desktop\JokeGenerator\JokeGeneratorConsole\obj\Debug\netcoreapp2.2\JokeGeneratorConsole.pdb
