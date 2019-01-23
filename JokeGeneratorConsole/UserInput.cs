@@ -1,27 +1,30 @@
 ﻿using System;
-using System.Net;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JokeGenerator
 {
     public class UserInput
     {
         public static object Decipher;
-        private static ConsoleKeyInfo character;
+        //private static ConsoleKeyInfo character;
         static char readChar;
+        static string readString;
 
         public char Key()
         {
             readChar = Console.ReadKey().KeyChar;
-            
-            // escape button condition
-            if (readChar == '\u001B')
+            if (readChar == '\u001B') // esc key
             {
-                System.Environment.Exit(1);
+               System.Environment.Exit(0);
             }
             return readChar;
         }
 
+        public string Word()
+        {
+            readString = Console.ReadLine();
+            return readString;
+        }
+
+        
     }
 }
