@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net;
+using Newtonsoft.Json;
+
 
 namespace JokeGenerator
 {
@@ -11,8 +14,12 @@ namespace JokeGenerator
         static string categoryList;
         static int categoryMatch;
         static char inputChar;
+        static string category;
+        static string gender;
         static string inputString;
+        static Tuple<string, string> name;
         const string ChuckNorrisCategoriesLink = "https://api.chucknorris.io/jokes/categories";
+        const string NameGeneratorLink = "https://uinames.com/api/";
 
         private static void DefaultValues()
         {
@@ -20,7 +27,10 @@ namespace JokeGenerator
             inputChar = '\0';
             inputString = "";
             categoryMatch = 0;
+            category = "";
             categoryList = "";
+            gender = "";
+            name = Tuple.Create("Chuck", "Norris");
         }
 
         static void Main(string[] args)
@@ -32,6 +42,7 @@ namespace JokeGenerator
                 StartCondition();
                 ViewCategories();
                 SelectCategory();
+                NameGenerator();
                 RepeatGame();
             }
             System.Environment.Exit(0);
@@ -125,7 +136,7 @@ namespace JokeGenerator
             while (repeat == true)
             {
                 inputString = read.Word();
-                categoryMatch = match();
+                categoryMatch = Match();
                 if (categoryMatch == 0)
                 {
                     // load without category
@@ -143,7 +154,69 @@ namespace JokeGenerator
             }
         }
 
-        private static int match()
+        private static void NameGenerator()
+        {
+            bool repeat = true;
+
+            Console.WriteLine("\nWould you like to use a random or specific name?");
+            Console.WriteLine("Press [d] for default, [r] for random, or [s] for specific name.");
+            while (repeat == true)
+            {
+                inputChar = read.Key();
+                if (inputChar == 'd')
+                {
+                    repeat = false;
+                }
+                else if (inputChar == 's')
+                {
+                    name = read.CustomName();
+                    repeat = false;
+                }
+                else if (inputChar == 'r')
+                {
+                    GenderSpecify();
+                    name = load.Identity(NameGeneratorLink + gender);
+                    repeat = false;
+                }
+                else
+                {
+                    Error();
+                }
+            }
+            Console.WriteLine("\nNew Name: (" + name.Item1 + ") (" + name.Item2 + ")");
+        }
+
+        private static void GenderSpecify()
+        {
+            bool repeat = true;
+
+            Console.WriteLine("\nWould you like to specify a gender?");
+            Console.WriteLine("Press [m] for male, [f] for female, or [n] to not specify.");
+            while (repeat == true)
+            {
+                inputChar = read.Key();
+                if (inputChar == 'm')
+                {
+                    gender = "?gender=male";
+                    repeat = false;
+                }
+                else if (inputChar == 'f')
+                {
+                    gender = "?gender=female";
+                    repeat = false;
+                }
+                else if (inputChar == 'n')
+                {
+                    repeat = false;
+                }
+                else
+                {
+                    Error();
+                }
+            }
+        }
+
+        private static int Match()
         {
             inputString.ToLower();
             categoryList.ToLower();
@@ -155,6 +228,7 @@ namespace JokeGenerator
             else if (categoryList.Contains("\"" + inputString + "\""))
             {
                 Console.WriteLine("Category has been found.");
+                category = inputString;
                 return 1;
             }
             else

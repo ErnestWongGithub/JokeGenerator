@@ -25,6 +25,32 @@ namespace JokeGenerator
             return readString;
         }
 
-        
+        public Tuple<string, string> CustomName()
+        {
+            string fullName = "";
+            string[] splitName;
+            string firstName = "";
+            string lastName = "";
+
+            Console.WriteLine("\nPlease enter custom name.\nPress [enter] to use default name.");
+            fullName = Word();
+            if (fullName == "")
+            {
+                return Tuple.Create("Chuck", "Norris");
+            }
+            else
+            {
+                if (fullName.Contains(" "))
+                {
+                    splitName = fullName.Split(new char[] { ' ' }, 2);
+                    return Tuple.Create(splitName[0], splitName[1]);
+                }
+                else
+                {
+                    return Tuple.Create(fullName, "");
+                }
+            }
+
+        }
     }
 }
