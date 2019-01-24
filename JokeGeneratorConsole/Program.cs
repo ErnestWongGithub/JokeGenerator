@@ -57,10 +57,11 @@ namespace JokeGenerator
 
         private static void StartBanner()
         {
-            Console.WriteLine("---------------------------------------------------");
-            Console.WriteLine("--- Welcome to the Chuck Norris Joke Generator! ---");
-            Console.WriteLine("---------------------------------------------------");
-            Console.Write("-- Press [s] to start or [esc] to exit anytime. --");
+            Console.SetWindowSize(70, 40);
+            Console.SetBufferSize(70, 40);
+            Console.WriteLine("         -----------------------------------------------------");
+            Console.WriteLine("         ---- Welcome to the Chuck Norris Joke Generator! ----");
+            Console.WriteLine("         -----------------------------------------------------");
         }
 
         private static void Error()
@@ -71,6 +72,8 @@ namespace JokeGenerator
         private static void StartCondition()
         {
             bool repeat = true;
+
+            Console.Write("Press [s] to start or [esc] to exit anytime. ");
             while (repeat == true)
             {
                 inputChar = read.Key();
@@ -88,9 +91,12 @@ namespace JokeGenerator
         private static void ViewCategories()
         {
             bool repeat = true;
-
+            string[] separateCategory;
             Console.Write("\nWould you like to view all possible categories?  (Y/N): ");
             categoryList = load.Categories(ChuckNorrisCategoriesLink);
+            categoryList = categoryList.Replace("\"", "");
+            categoryList = categoryList.Replace(",", "] [");
+            separateCategory = categoryList.Split(" ");
             while (repeat == true)
             {
                 inputChar = read.Key();
@@ -100,7 +106,16 @@ namespace JokeGenerator
                 }
                 else if (inputChar == 'y')
                 {
-                    Console.WriteLine("\n\n" + categoryList);
+                    Console.WriteLine("\n\nCategories:");
+                    if (separateCategory.Length != 5)
+                    {
+                        Console.WriteLine(separateCategory[0] + separateCategory[1] + separateCategory[2] + separateCategory[3] + separateCategory[4] + separateCategory[5] + separateCategory[6] + separateCategory[7]);
+                        Console.WriteLine(separateCategory[8] + separateCategory[9] + separateCategory[10] + separateCategory[11] + separateCategory[12] + separateCategory[13] + separateCategory[14] + separateCategory[15]);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Database could not be loaded.");
+                    }
                     repeat = false;
                 }
                 else
@@ -260,8 +275,15 @@ namespace JokeGenerator
 
         private static void NameSwap()
         {
-            actualJoke = actualJoke.Replace("Chuck", (name.Item1), StringComparison.OrdinalIgnoreCase);
-            actualJoke = actualJoke.Replace("Norris", (name.Item2), StringComparison.OrdinalIgnoreCase);
+            if (name.Item2 != "")
+            {
+                actualJoke = actualJoke.Replace("Chuck", (name.Item1), StringComparison.OrdinalIgnoreCase);
+                actualJoke = actualJoke.Replace("Norris", (name.Item2), StringComparison.OrdinalIgnoreCase);
+            }
+            else
+            {
+                actualJoke = actualJoke.Replace("Chuck Norris", (name.Item1), StringComparison.OrdinalIgnoreCase);
+            }
             if (gender == "?gender=female")
             {
                 actualJoke = actualJoke.Replace(" he ", " she ", StringComparison.OrdinalIgnoreCase);
@@ -278,7 +300,7 @@ namespace JokeGenerator
                 Console.WriteLine("No category has been chosen.");
                 return 0;
             }
-            else if (categoryList.Contains("\"" + inputString + "\""))
+            else if (categoryList.Contains("[" + inputString + "]"))
             {
                 Console.WriteLine("Category has been found.");
                 category = inputString;

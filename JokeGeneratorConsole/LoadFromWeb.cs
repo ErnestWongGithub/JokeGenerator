@@ -9,7 +9,7 @@ namespace JokeGenerator
         public string Categories(string url)
         {
             string results;
-            string exceptionMessage = "Unfortunately, the categories could not be fetched.";
+            string exceptionMessage = "Categories could not be fetched.";
 
             using (WebClient client = new WebClient())
             {
