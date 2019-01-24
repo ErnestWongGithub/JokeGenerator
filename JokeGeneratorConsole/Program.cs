@@ -14,9 +14,10 @@ namespace JokeGenerator
         static string categoryList;
         static int categoryMatch;
         static char inputChar;
+        static string inputString;
         static string category;
         static string gender;
-        static string inputString;
+        static int numJokes;
         static Tuple<string, string> name;
         const string ChuckNorrisCategoriesLink = "https://api.chucknorris.io/jokes/categories";
         const string NameGeneratorLink = "https://uinames.com/api/";
@@ -30,6 +31,7 @@ namespace JokeGenerator
             category = "";
             categoryList = "";
             gender = "";
+            numJokes = 0;
             name = Tuple.Create("Chuck", "Norris");
         }
 
@@ -43,6 +45,7 @@ namespace JokeGenerator
                 ViewCategories();
                 SelectCategory();
                 NameGenerator();
+                JokeAmount();
                 RepeatGame();
             }
             System.Environment.Exit(0);
@@ -207,6 +210,26 @@ namespace JokeGenerator
                 }
                 else if (inputChar == 'n')
                 {
+                    repeat = false;
+                }
+                else
+                {
+                    Error();
+                }
+            }
+        }
+
+        private static void JokeAmount()
+        {
+            bool repeat = true;
+
+            Console.WriteLine("\nPlease input the amount of jokes you wish to view.  (1-9)");
+            while (repeat == true)
+            {
+                inputChar = read.Key();
+                if (Char.IsDigit(inputChar) && inputChar != '0')
+                {
+                    numJokes = (int)inputChar;
                     repeat = false;
                 }
                 else

@@ -29,8 +29,6 @@ namespace JokeGenerator
         {
             string fullName = "";
             string[] splitName;
-            string firstName = "";
-            string lastName = "";
 
             Console.WriteLine("\nPlease enter custom name.\nPress [enter] to use default name.");
             fullName = Word();
