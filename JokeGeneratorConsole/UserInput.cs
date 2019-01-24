@@ -5,7 +5,6 @@ namespace JokeGenerator
     public class UserInput
     {
         public static object Decipher;
-        //private static ConsoleKeyInfo character;
         static char readChar;
         static string readString;
 

@@ -107,7 +107,7 @@ namespace JokeGenerator
                 else if (inputChar == 'y')
                 {
                     Console.WriteLine("\n\nCategories:");
-                    if (separateCategory.Length != 5)
+                    if (separateCategory.Length != 1)
                     {
                         Console.WriteLine(separateCategory[0] + separateCategory[1] + separateCategory[2] + separateCategory[3] + separateCategory[4] + separateCategory[5] + separateCategory[6] + separateCategory[7]);
                         Console.WriteLine(separateCategory[8] + separateCategory[9] + separateCategory[10] + separateCategory[11] + separateCategory[12] + separateCategory[13] + separateCategory[14] + separateCategory[15]);

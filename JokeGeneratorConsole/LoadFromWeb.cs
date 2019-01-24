@@ -9,7 +9,6 @@ namespace JokeGenerator
         public string Categories(string url)
         {
             string results;
-            string exceptionMessage = "Categories could not be fetched.";
 
             using (WebClient client = new WebClient())
             {
@@ -19,7 +18,7 @@ namespace JokeGenerator
                 }
                 catch (WebException e)
                 {
-                    results = exceptionMessage;
+                    results = "";
                 }
             }
             return results;
