@@ -60,13 +60,12 @@ namespace JokeGenerator
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine("--- Welcome to the Chuck Norris Joke Generator! ---");
             Console.WriteLine("---------------------------------------------------");
-            Console.WriteLine("Press [s] to start.");
-            Console.WriteLine("Press [esc] at anytime to exit.");
+            Console.Write("-- Press [s] to start or [esc] to exit anytime. --");
         }
 
         private static void Error()
         {
-            Console.WriteLine("\nInvalid input. Please try again.");
+            Console.Write("\nInvalid input. Please try again.  ");
         }
 
         private static void StartCondition()
@@ -90,7 +89,7 @@ namespace JokeGenerator
         {
             bool repeat = true;
 
-            Console.WriteLine("\nWould you like to view all possible categories?  (Y/N)");
+            Console.Write("\nWould you like to view all possible categories?  (Y/N): ");
             categoryList = load.Categories(ChuckNorrisCategoriesLink);
             while (repeat == true)
             {
@@ -115,7 +114,7 @@ namespace JokeGenerator
         {
             bool repeat = true;
 
-            Console.WriteLine("\nWould you like to select a category?  (Y/N)");
+            Console.Write("\nWould you like to select a category?  (Y/N): ");
             while (repeat == true)
             {
                 inputChar = read.Key();
@@ -139,7 +138,7 @@ namespace JokeGenerator
         {
             bool repeat = true;
 
-            Console.WriteLine("\nPlease enter a category.\nPress [enter] to skip.");
+            Console.Write("\nPlease enter a category. Press [enter] to skip: ");
             while (repeat == true)
             {
                 inputString = read.Word();
@@ -160,7 +159,7 @@ namespace JokeGenerator
             bool repeat = true;
 
             Console.WriteLine("\nWould you like to use a random or specific name?");
-            Console.WriteLine("Press [d] for default, [r] for random, or [s] for specific name.");
+            Console.Write("Press [d] for default, [r] for random, or [s] for specific name: ");
             while (repeat == true)
             {
                 inputChar = read.Key();
@@ -184,7 +183,6 @@ namespace JokeGenerator
                     Error();
                 }
             }
-            Console.WriteLine("\nNew Name: (" + name.Item1 + ") (" + name.Item2 + ")");
         }
 
         private static void GenderSpecify()
@@ -192,7 +190,7 @@ namespace JokeGenerator
             bool repeat = true;
 
             Console.WriteLine("\nWould you like to specify a gender?");
-            Console.WriteLine("Press [m] for male, [f] for female, or [n] to not specify.");
+            Console.Write("Press [m] for male, [f] for female, or [n] to not specify: ");
             while (repeat == true)
             {
                 inputChar = read.Key();
@@ -221,7 +219,7 @@ namespace JokeGenerator
         {
             bool repeat = true;
 
-            Console.WriteLine("\nPlease input the amount of jokes you wish to view.  (1-9)");
+            Console.Write("\nPlease input the amount of jokes you wish to view.  (1-9): ");
             while (repeat == true)
             {
                 inputChar = read.Key();

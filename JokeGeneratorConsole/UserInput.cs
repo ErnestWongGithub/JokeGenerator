@@ -30,7 +30,7 @@ namespace JokeGenerator
             string fullName = "";
             string[] splitName;
 
-            Console.WriteLine("\nPlease enter custom name.\nPress [enter] to use default name.");
+            Console.Write("\nPlease enter custom name. Press [enter] to use default name: ");
             fullName = Word();
             if (fullName == "")
             {
