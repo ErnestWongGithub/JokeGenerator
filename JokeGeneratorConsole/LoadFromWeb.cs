@@ -9,6 +9,8 @@ namespace JokeGenerator
         public string Categories(string url)
         {
             string results;
+            string exceptionMessage = "Unfortunately, the categories could not be fetched.";
+
             using (WebClient client = new WebClient())
             {
                 try
@@ -17,7 +19,7 @@ namespace JokeGenerator
                 }
                 catch (WebException e)
                 {
-                    results = "Unfortunately, the categories could not be fetched.";
+                    results = exceptionMessage;
                 }
             }
             return results;
@@ -26,6 +28,7 @@ namespace JokeGenerator
         public Tuple<string, string> Identity (string url)
         {
             string results;
+
             using (WebClient client = new WebClient())
             {
                 try
@@ -41,7 +44,26 @@ namespace JokeGenerator
                     return Tuple.Create("Chuck", "Norris");
                 }
             }
+        }
 
+        public string Joke (string url)
+        {
+            string results;
+            string exceptionMessage = "Chuck Norris roundhouse kicked the joke too far away for the program to fetch.";
+
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    results = client.DownloadString(url);
+                    var obj = JsonConvert.DeserializeObject<dynamic>(results);
+                    return (string)obj.value;
+                }
+                catch (WebException e)
+                {
+                    return exceptionMessage;
+                }
+            }
         }
     }
 }

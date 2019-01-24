@@ -18,8 +18,10 @@ namespace JokeGenerator
         static string category;
         static string gender;
         static int numJokes;
+        static string actualJoke;
         static Tuple<string, string> name;
         const string ChuckNorrisCategoriesLink = "https://api.chucknorris.io/jokes/categories";
+        const string ChuckNorrisJokeLink = "https://api.chucknorris.io/jokes/random?";
         const string NameGeneratorLink = "https://uinames.com/api/";
 
         private static void DefaultValues()
@@ -32,6 +34,7 @@ namespace JokeGenerator
             categoryList = "";
             gender = "";
             numJokes = 0;
+            actualJoke = "";
             name = Tuple.Create("Chuck", "Norris");
         }
 
@@ -46,6 +49,7 @@ namespace JokeGenerator
                 SelectCategory();
                 NameGenerator();
                 JokeAmount();
+                DisplayJokes();
                 RepeatGame();
             }
             System.Environment.Exit(0);
@@ -140,14 +144,8 @@ namespace JokeGenerator
             {
                 inputString = read.Word();
                 categoryMatch = Match();
-                if (categoryMatch == 0)
+                if (categoryMatch == 0 || categoryMatch == 1)
                 {
-                    // load without category
-                    repeat = false;
-                }
-                else if (categoryMatch == 1)
-                {
-                    // load with category
                     repeat = false;
                 }
                 else
@@ -229,13 +227,47 @@ namespace JokeGenerator
                 inputChar = read.Key();
                 if (Char.IsDigit(inputChar) && inputChar != '0')
                 {
-                    numJokes = (int)inputChar;
+                    numJokes = (int) Char.GetNumericValue(inputChar);
                     repeat = false;
                 }
                 else
                 {
                     Error();
                 }
+            }
+        }
+
+        private static void DisplayJokes()
+        {
+            Console.WriteLine("\n\nJokes:");
+            for (int i = 1; i <= numJokes; i++)
+            {
+                GetJoke();
+                NameSwap();
+                Console.WriteLine(i + ". " + actualJoke);
+            }
+        }
+
+        private static void GetJoke()
+        {
+            if (categoryMatch == 0)
+            {
+                actualJoke = load.Joke(ChuckNorrisJokeLink);
+            }
+            else
+            {
+                actualJoke = load.Joke(ChuckNorrisJokeLink + "category=" + category);
+            }
+        }
+
+        private static void NameSwap()
+        {
+            actualJoke = actualJoke.Replace("Chuck", (name.Item1), StringComparison.OrdinalIgnoreCase);
+            actualJoke = actualJoke.Replace("Norris", (name.Item2), StringComparison.OrdinalIgnoreCase);
+            if (gender == "?gender=female")
+            {
+                actualJoke = actualJoke.Replace(" he ", " she ", StringComparison.OrdinalIgnoreCase);
+                actualJoke = actualJoke.Replace(" his ", " her ", StringComparison.OrdinalIgnoreCase);
             }
         }
 
