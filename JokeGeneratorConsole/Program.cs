@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Net;
-using Newtonsoft.Json;
-
 
 namespace JokeGenerator
 {
@@ -40,6 +37,7 @@ namespace JokeGenerator
 
         static void Main(string[] args)
         {
+            ConsoleSettings();
             DefaultValues();
             while (loopGame == true)
             {
@@ -55,29 +53,40 @@ namespace JokeGenerator
             System.Environment.Exit(0);
         }
 
+        private static void ConsoleSettings()
+        {
+            int width = 91;
+            int height = 37;
+            Console.SetWindowSize(width, height);
+            Console.SetBufferSize(width, height);
+        }
+
         private static void StartBanner()
         {
-            Console.SetWindowSize(70, 40);
-            Console.SetBufferSize(70, 40);
-            Console.WriteLine("         -----------------------------------------------------");
-            Console.WriteLine("         ---- Welcome to the Chuck Norris Joke Generator! ----");
-            Console.WriteLine("         -----------------------------------------------------");
+            string title = "Welcome to the Chuck Norris Joke Generator!";
+            string spacing = new String (' ', 22);
+            string borderline = new String ('═', 43);
+            Console.WriteLine(" ╔{0}═{0}╗", borderline);
+            Console.WriteLine(" ║{0}{1}{0}║", spacing, title);
+            Console.WriteLine(" ╚{0}═{0}╝", borderline);
         }
 
         private static void Error()
         {
-            Console.Write("\nInvalid input. Please try again.  ");
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new String(' ', Console.BufferWidth));
+            Console.SetCursorPosition(0, Console.CursorTop - 1);
         }
 
         private static void StartCondition()
         {
             bool repeat = true;
 
-            Console.Write("Press [s] to start or [esc] to exit anytime. ");
             while (repeat == true)
             {
+                Console.Write("Press [s] to start or [esc] to exit anytime. ");
                 inputChar = read.Key();
-                if (inputChar != 's')
+                if (Char.ToLower(inputChar) != 's')
                 {
                     Error();
                 }
@@ -86,25 +95,27 @@ namespace JokeGenerator
                     repeat = false;
                 }
             }
+            Console.WriteLine();
         }
 
         private static void ViewCategories()
         {
             bool repeat = true;
             string[] separateCategory;
-            Console.Write("\nWould you like to view all possible categories?  (Y/N): ");
+
             categoryList = load.Categories(ChuckNorrisCategoriesLink);
             categoryList = categoryList.Replace("\"", "");
             categoryList = categoryList.Replace(",", "] [");
             separateCategory = categoryList.Split(" ");
             while (repeat == true)
             {
+                Console.Write("Would you like to view all possible categories?  (Y/N): ");
                 inputChar = read.Key();
-                if (inputChar == 'n')
+                if (Char.ToLower(inputChar) == 'n')
                 {
                     repeat = false;
                 }
-                else if (inputChar == 'y')
+                else if (Char.ToLower(inputChar) == 'y')
                 {
                     Console.WriteLine("\n\nCategories:");
                     if (separateCategory.Length != 1)
@@ -123,22 +134,24 @@ namespace JokeGenerator
                     Error();
                 }
             }
+            Console.WriteLine();
         }
 
         private static void SelectCategory()
         {
             bool repeat = true;
 
-            Console.Write("\nWould you like to select a category?  (Y/N): ");
             while (repeat == true)
             {
+                Console.Write("Would you like to select a category?  (Y/N): ");
                 inputChar = read.Key();
-                if (inputChar == 'n')
+                if (Char.ToLower(inputChar) == 'n')
                 {
                     repeat = false;
                 }
-                else if (inputChar == 'y')
+                else if (Char.ToLower(inputChar) == 'y')
                 {
+                    Console.WriteLine();
                     CategoryCheck();
                     repeat = false;
                 }
@@ -147,15 +160,16 @@ namespace JokeGenerator
                     Error();
                 }
             }
+            Console.WriteLine();
         }
 
         private static void CategoryCheck()
         {
             bool repeat = true;
 
-            Console.Write("\nPlease enter a category. Press [enter] to skip: ");
             while (repeat == true)
             {
+                Console.Write("Please enter a category. Press [enter] to skip: ");
                 inputString = read.Word();
                 categoryMatch = Match();
                 if (categoryMatch == 0 || categoryMatch == 1)
@@ -164,6 +178,7 @@ namespace JokeGenerator
                 }
                 else
                 {
+                    Console.SetCursorPosition(0, Console.CursorTop - 1);
                     Error();
                 }
             }
@@ -173,22 +188,24 @@ namespace JokeGenerator
         {
             bool repeat = true;
 
-            Console.WriteLine("\nWould you like to use a random or specific name?");
-            Console.Write("Press [d] for default, [r] for random, or [s] for specific name: ");
+            Console.WriteLine("Would you like to use a random or specific name?");
             while (repeat == true)
             {
+                Console.Write("Press [d] for default, [r] for random, or [s] for specific name: ");
                 inputChar = read.Key();
-                if (inputChar == 'd')
+                if (Char.ToLower(inputChar) == 'd')
                 {
+                    Console.WriteLine();
                     repeat = false;
                 }
-                else if (inputChar == 's')
+                else if (Char.ToLower(inputChar) == 's')
                 {
                     name = read.CustomName();
                     repeat = false;
                 }
-                else if (inputChar == 'r')
+                else if (Char.ToLower(inputChar) == 'r')
                 {
+                    Console.WriteLine();
                     GenderSpecify();
                     name = load.Identity(NameGeneratorLink + gender);
                     repeat = false;
@@ -204,22 +221,22 @@ namespace JokeGenerator
         {
             bool repeat = true;
 
-            Console.WriteLine("\nWould you like to specify a gender?");
-            Console.Write("Press [m] for male, [f] for female, or [n] to not specify: ");
+            Console.WriteLine("Would you like to specify a gender?");
             while (repeat == true)
             {
+                Console.Write("Press [m] for male, [f] for female, or [n] to not specify: ");
                 inputChar = read.Key();
-                if (inputChar == 'm')
+                if (Char.ToLower(inputChar) == 'm')
                 {
                     gender = "?gender=male";
                     repeat = false;
                 }
-                else if (inputChar == 'f')
+                else if (Char.ToLower(inputChar) == 'f')
                 {
                     gender = "?gender=female";
                     repeat = false;
                 }
-                else if (inputChar == 'n')
+                else if (Char.ToLower(inputChar) == 'n')
                 {
                     repeat = false;
                 }
@@ -228,19 +245,20 @@ namespace JokeGenerator
                     Error();
                 }
             }
+            Console.WriteLine();
         }
 
         private static void JokeAmount()
         {
             bool repeat = true;
 
-            Console.Write("\nPlease input the amount of jokes you wish to view.  (1-9): ");
             while (repeat == true)
             {
+                Console.Write("Please input the amount of jokes you wish to view.  (1-9): ");
                 inputChar = read.Key();
                 if (Char.IsDigit(inputChar) && inputChar != '0')
                 {
-                    numJokes = (int) Char.GetNumericValue(inputChar);
+                    numJokes = (int)Char.GetNumericValue(inputChar);
                     repeat = false;
                 }
                 else
@@ -297,12 +315,10 @@ namespace JokeGenerator
             categoryList.ToLower();
             if (inputString == "")
             {
-                Console.WriteLine("No category has been chosen.");
                 return 0;
             }
             else if (categoryList.Contains("[" + inputString + "]"))
             {
-                Console.WriteLine("Category has been found.");
                 category = inputString;
                 return 1;
             }
@@ -316,16 +332,17 @@ namespace JokeGenerator
         {
             bool repeat = true;
 
-            Console.WriteLine("\nWould you like to play again?  (Y/N)");
+            Console.WriteLine();
             while (repeat == true)
             {
+                Console.Write("Would you like to play again?  (Y/N): ");
                 inputChar = read.Key();
-                if (inputChar == 'n')
+                if (Char.ToLower(inputChar) == 'n')
                 {
                     loopGame = false;
                     repeat = false;
                 }
-                else if (inputChar == 'y')
+                else if (Char.ToLower(inputChar) == 'y')
                 {
                     DefaultValues();
                     repeat = false;

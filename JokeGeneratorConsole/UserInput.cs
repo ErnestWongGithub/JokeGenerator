@@ -47,7 +47,6 @@ namespace JokeGenerator
                     return Tuple.Create(fullName, "");
                 }
             }
-
         }
     }
 }
