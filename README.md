@@ -12,4 +12,4 @@ The application is written in C#.
 
 ### Questions ###
 
-Email: ernest@ernestwong.ca
+Email: ernestwong.ca@gmail.com
